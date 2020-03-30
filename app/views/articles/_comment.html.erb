@@ -2,4 +2,10 @@
     <h4>Comment by <%= comment.author_name %></h4>
     <p>Posted <%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later</p>
     <p class="comment"><%= comment.body %></p>
+    <p>
+        <%= link_to "Delete",
+            [comment.article, comment],
+            method: :delete,
+            data: { confirm: "Really delete the comment?" } %>
+    </p>
 </div>

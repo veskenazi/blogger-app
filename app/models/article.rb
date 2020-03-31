@@ -1,8 +1,11 @@
 class Article < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 5 }
   has_many :comments, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings, dependent: :destroy
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
+  validates :title, presence: true, length: { minimum: 5 }
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+
 
   def tag_list
     self.tags.collect do |tag|
